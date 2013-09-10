@@ -1,79 +1,120 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Jarx : " />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Jarx</title>
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jarallax-0.2.2.js"></script>
+    <script type="text/javascript">
+      var jarallax
+      init = function() {
+        jarallax = new Jarallax(new ControllerScroll(true));
+        var currentProgress = 0;
+        var progressSteps = 1 / 5;
+        
+        jarallax.setDefault('.container',{opacity:0, display:'none'})
+        
+        jarallax.addAnimation('.logo',[{progress:'0', opacity:'1', backgroundPositionY:'50%'},
+                                       {progress:'10', opacity:'0', backgroundPositionY:'0%'},
+                                       {progress:'100%', opacity:'0', backgroundPositionY:'0%'}]);
+                                       
+        var animation = jarallax.addAnimation('#slide1',[{progress:'0', display:'block', opacity:'0', top:'100%'},
+                                                         {progress:'10', display:'block', opacity:'1', top:'20%'},
+                                                         {progress:'20', display:'block', opacity:'0', top:'0%'}]);
+                                                         
+        jarallax.cloneAnimation('#slide2',{progress:'+10'}, animation);
+        jarallax.cloneAnimation('#slide3',{progress:'+20'}, animation);
+        jarallax.cloneAnimation('#slide4',{progress:'+30'}, animation);
+      }
+    </script>
   </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Leega0/jarx">View on GitHub</a>
-
-          <h1 id="project_title">Jarx</h1>
-          <h2 id="project_tagline"></h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Leega0/jarx/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Leega0/jarx/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+  <body onLoad='init()'>
+    <nav>
+      <ul>
+        <li><a href="#" onClick="jarallax.jumpToProgress( 0, 2000, 30);">Intro</a></li>
+        <li><a href="#" onClick="jarallax.jumpToProgress( 10, 2000, 30);">New features</a></li>
+        <li><a href="#" onClick="jarallax.jumpToProgress( 20, 2000, 30);">Jump to progress</a></li>
+        <li><a href="#" onClick="jarallax.jumpToProgress( 30, 2000, 30);">Smooth scrollbar</a></li>
+        <li><a href="#" onClick="jarallax.jumpToProgress( 40, 2000, 30);">Clone animations</a></li>
+      </ul>
+    </nav>
+    <h1 class="logo">Jarallax</h1>
+    <div class="container" id="slide1">
+      <h2>version: 0.2.2</h2>
+      <p>
+        <b>New features:</b>
+        <ul>
+          <li><a href="#" onClick="jarallax.jumpToProgress( 20, 2000, 30);">Jump to progress</a></li>
+          <li><a href="#" onClick="jarallax.jumpToProgress( 30, 2000, 30);">Smooth scrollbar</a></li>
+          <li><a href="#" onClick="jarallax.jumpToProgress( 40, 2000, 30);">Clone animations</a></li>
+        </ul>
+      </p>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
+    <div class="container" id="slide2">
+      <h2>Jump to progress</h2>
+      <p>
+        the Jarallax.jumpToProgress method allows the user to animate the Jarallax animation to a position in the animation. 
+        This is a very handy method for navigation. To see it in action press one of the navigation buttons on top of the page.
+      </p>
+<b>Example</b>
+<pre>
+jarallax.jumpToProgress( 20, 2000, 30);
+</pre>
+<p>
+In this example Jarallax animates to position 20 over 2000 milliseconds with 24 frames a second.
+A lower frame rate will increase preformance but lower the amount of updates.
+</p>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Jarx maintained by <a href="https://github.com/Leega0">Leega0</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
+    <div class="container" id="slide3">
+      <h2>Smooth scrollbar</h2>
+      <p>
+        Some browsers smooth out the scrollbar when it is moved (like safari). This makes the Jarallax animations play more smoothly when the scroll bar is moved.
+         Most browsers don't smooth out the scrollbar, this is visible when the down arrow is pressed.
+Enabling the smoothed scrollbar will animate the current progress of the Jarallax animation to the scrollbar position. 
+This prevents animation jumping and animates the website even with small steps. 
+This feature does require more updates which makes it more CPU heavy.
+      </p>
+      <p>
+        Enabling the smoothed scrollbar will animate the current progress of the Jarallax animation to the scrollbar position.
+        This prevents animation jumping and animates the website even with small steps.
+        This feature does require more updates which makes it more CPU heavy.
+      </p>
+<b>Example:</b>
+<pre>
+var jarallax = new Jarallax(<b>new ControllerScroll(true)</b>);
+</pre>
     </div>
-
-    
-
+    <div class="container" id="slide4">
+      <h2>Clone animations</h2>
+      <p>
+        In earlier versions of Jarallax every animation needs to be defined. 
+        With cloneAnimation existing animations can be cloned and slightly adjusted. 
+        With this feature many animations can be created and adjusted with less efford.
+      </p>
+<b>Example</b>
+<pre>
+var jarallax = new Jarallax();
+var animation = jarallax.addAnimation('#slide1',[{progress:'0', opacity:'0', top:'100%'},
+                                                 {progress:'10', opacity:'1', top:'40%'},
+                                                 {progress:'20', opacity:'0', top:'0%'}]);
+                        
+jarallax.<b>cloneAnimation</b>('#slide2',{progress:'+10'}, animation);
+jarallax.<b>cloneAnimation</b>('#slide3',{progress:'+20'}, animation);
+jarallax.<b>cloneAnimation</b>('#slide4',{progress:'+30'}, animation);
+</pre>
+<p>
+When defining an animation with the addAnimation method, an animation sequence is returned. 
+This sequence can be cloned and adjusted with the cloneAnimation method.
+</p>
+<p>
+The first argument expects a selector, the second an object or array with the key modifications. 
+The third argument is the original animation sequence which you want to clone.
+</p>
+    </div>
+    <script type="text/javascript">
+      try{ 
+      var pageTracker = _gat._getTracker("UA-26904605-1");
+      pageTracker._trackPageview();
+      } catch(err) {} 
+    </script>
   </body>
 </html>
